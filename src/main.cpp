@@ -13,6 +13,7 @@
  */
 
 #include <WifiEspNowBroadcast.h>
+#include <Adafruit_NeoPixel.h>
 #if defined(ARDUINO_ARCH_ESP8266)
 #include <ESP8266WiFi.h>
 #elif defined(ARDUINO_ARCH_ESP32)
@@ -22,6 +23,13 @@
 #include "TxTime.h"
 #include "JSONTime.h"
 #include "TimeFilter.h"
+#include "EffectManager.h"
+#include "EffectStepColour.h"
+
+#define PIN 0
+#define NUM_PIXELS 8
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 
 TxTime txTime(10, 50);  // Tx every 10ms, scale timer to every 50ms
@@ -31,13 +39,16 @@ PacerLED statusLED(8);
 JSONTime jsonTime; 
 SystemTime systemTime(&txTime);
 TimeFilter timeFilter(&txTime, &systemTime, 45);
+EffectManager effectManager;
+
+EffectStepColour effectStepColour;
 
 void
 processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
   char message[count + 1] = {0};
   memcpy(message,buf, count);
-
+  Serial.println("SSSSSSSSSSSSSSSSSSS");
   uint64_t rxTime = jsonTime.Update(message);
   if(rxTime != 0)
   {
@@ -74,7 +85,20 @@ setup()
 
   Serial.print("MAC address of this node is ");
   Serial.println(WiFi.softAPmacAddress());
-  statusLED.SetState(false);
+
+  effectManager.AddEffect(&effectStepColour);
+
+  strip.begin();
+  strip.show(); // Initialize all pixels to 'off'
+  uint8_t r=16;
+  for(int i=0 ; i  < NUM_PIXELS ; i++)
+  {
+    strip.setPixelColor(i, r,0,0);
+    r+=16;
+  }
+  strip.show();
+
+
 }
 
 void
@@ -114,4 +138,5 @@ loop()
   }
   timeFilter.Run();
   delay(2);
+// effectManager.Run(&strip, systemTime.GetTime());
 }

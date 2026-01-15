@@ -18,6 +18,10 @@ void TimeFilter::Init()
 
 void TimeFilter::RxNewTime(uint64_t newTime)
 {
+    Serial.print("New time ");
+    Serial.println(newTime);
+    Serial.print("Current high time ");
+    Serial.println(m_highestTime.highTime);
     if(newTime > m_highestTime.highTime)
     {
         m_higherTimeFound = true;
