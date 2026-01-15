@@ -6,14 +6,14 @@
 #include "ArduinoJson.h"
 #include "IGetTxTime.h"
 
-
+class SystemTime;
 class TxTime : private Pacer, public IGetTxTime
 {
 public:
     TxTime(int txRate, int timerScaler);
     uint64_t GetTxTime() override;
     void Init();
-    String GetTxTimeAsString();
+    String GetTxTimeAsString(SystemTime* st);
 private:
     JsonDocument doc;
     uint64_t m_localT;

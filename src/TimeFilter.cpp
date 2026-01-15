@@ -4,7 +4,6 @@
 TimeFilter::TimeFilter(TxTime* txTime, SystemTime* systemTime, int filterTime)
 : Pacer(true)
 {
-    m_txTime = txTime;
     m_systemTime = systemTime;
     SetPace(filterTime);
     Init();
@@ -12,7 +11,7 @@ TimeFilter::TimeFilter(TxTime* txTime, SystemTime* systemTime, int filterTime)
 
 void TimeFilter::Init()
 {
-    m_highestTime.highTime = m_txTime->GetTxTime();
+    m_highestTime.highTime = m_systemTime->GetTime();
     m_higherTimeFound = false;
 }
 
@@ -37,17 +36,11 @@ void TimeFilter::Run()
     if(Pace())
     {
         
-        if(!m_higherTimeFound)
-        {
-            m_systemTime->ClearOffset();
-            Serial.println("Higher time not found. Using local time");
-        }
-        else
+        if(m_higherTimeFound)
         {
            m_systemTime->UpdateTime(m_highestTime.highTime);
         }
-        Serial.print("New system time is ");
-        Serial.println(m_systemTime->GetTime());
+
         Init();
     }
 }

@@ -25,7 +25,6 @@ public:
     
 private:
     HighestTime m_highestTime;
-    TxTime* m_txTime;
     SystemTime* m_systemTime;
     bool m_higherTimeFound;
 

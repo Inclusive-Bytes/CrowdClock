@@ -2,6 +2,7 @@
 #include "TxTime.h"
 #include "ArduinoJson.h"
 #include "JsonFields.h"
+#include "SystemTime.h"
 
 TxTime::TxTime(int txRate, int timerScaler)
 : Pacer(true)
@@ -22,12 +23,14 @@ void TxTime::Init()
     
 }
 
-String TxTime::GetTxTimeAsString()
+String TxTime::GetTxTimeAsString(SystemTime* st)
 {
    
     if(Pace())
     {
-        GetTxTime();
+        uint64_t current = st->GetTime();
+        m_localT = current - ( current % m_timerScaler);    
+    
 
         doc[JSONFields::timerField] = m_localT;
         

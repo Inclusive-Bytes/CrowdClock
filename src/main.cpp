@@ -48,7 +48,7 @@ processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, 
 {
   char message[count + 1] = {0};
   memcpy(message,buf, count);
-  Serial.println("SSSSSSSSSSSSSSSSSSS");
+
   uint64_t rxTime = jsonTime.Update(message);
   if(rxTime != 0)
   {
@@ -131,12 +131,12 @@ loop()
 
   WifiEspNowBroadcast.loop();
   statusLED.Run();
-  String sendTime = txTime.GetTxTimeAsString();
+  String sendTime = txTime.GetTxTimeAsString(&systemTime);
   if(sendTime.length())
   {
     sendMessage(sendTime);
   }
   timeFilter.Run();
   delay(2);
-// effectManager.Run(&strip, systemTime.GetTime());
+  effectManager.Run(&strip, systemTime.GetTime());
 }
