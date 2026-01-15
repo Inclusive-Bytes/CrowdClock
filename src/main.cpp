@@ -73,12 +73,10 @@ setup()
 }
 
 void
-sendMessage()
+sendMessage(String& message)
 {
-  char msg[60];
-  int len = snprintf(msg, sizeof(msg), "hello ESP-NOW from %s at %lu",
-                     WiFi.softAPmacAddress().c_str(), millis());
-  WifiEspNowBroadcast.send(reinterpret_cast<const uint8_t*>(msg), len);
+  Serial.println(message);
+  WifiEspNowBroadcast.send(reinterpret_cast<const uint8_t*>(message.c_str()), message.length());
 
   //Serial.println("Sending message");
   //Serial.println(msg);
@@ -94,15 +92,20 @@ sendMessage()
   Serial.println(); */
 }
 
+
 void
 loop()
 {
 
-  sendMessage();
+
 
 
   WifiEspNowBroadcast.loop();
   statusLED.Run();
-  txTime.GetTxTime();
+  String sendTime = txTime.GetTxTime();
+  if(sendTime.length())
+  {
+    sendMessage(sendTime);
+  }
   delay(2);
 }
