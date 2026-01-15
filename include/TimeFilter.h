@@ -3,12 +3,17 @@
 
 #include <Arduino.h>
 #include "Pacer.h"
+#include "TxTime.h"
+#include "SystemTime.h"
 
 class TimeFilter : private Pacer
 {
+public:    
+    TimeFilter(TxTime* txTime, SystemTime* systemTime, int filterTime);
+
     void Init();
 
-    void RxNewTime();
+    void RxNewTime(uint64_t newTime);
 
     void Run();
 
@@ -20,7 +25,10 @@ class TimeFilter : private Pacer
     
 private:
     HighestTime m_highestTime;
+    TxTime* m_txTime;
+    SystemTime* m_systemTime;
+    bool m_higherTimeFound;
 
 
-}
+};
 #endif // __TIMEFILTER_H__

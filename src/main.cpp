@@ -20,24 +20,29 @@
 #endif
 #include "PacerLED.h"
 #include "TxTime.h"
+#include "JSONTime.h"
+#include "TimeFilter.h"
 
 
 TxTime txTime(10, 50);  // Tx every 10ms, scale timer to every 50ms
 
 PacerLED statusLED(8);
 
+JSONTime jsonTime; 
+SystemTime systemTime(&txTime);
+TimeFilter timeFilter(&txTime, &systemTime, 45);
 
 void
 processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
-  Serial.printf("Message from %02X:%02X:%02X:%02X:%02X:%02X\n", mac[0], mac[1], mac[2], mac[3],
-                mac[4], mac[5]);
-  for (size_t i = 0; i < count; ++i) {
-    Serial.print(static_cast<char>(buf[i]));
+  char message[count + 1] = {0};
+  memcpy(message,buf, count);
+
+  uint64_t rxTime = jsonTime.Update(message);
+  if(rxTime != 0)
+  {
+    timeFilter.RxNewTime(rxTime);
   }
-  Serial.println();
-
-
 }
 
 void
@@ -75,7 +80,7 @@ setup()
 void
 sendMessage(String& message)
 {
-  Serial.println(message);
+ //Serial.println(message);
   WifiEspNowBroadcast.send(reinterpret_cast<const uint8_t*>(message.c_str()), message.length());
 
   //Serial.println("Sending message");
@@ -102,10 +107,11 @@ loop()
 
   WifiEspNowBroadcast.loop();
   statusLED.Run();
-  String sendTime = txTime.GetTxTime();
+  String sendTime = txTime.GetTxTimeAsString();
   if(sendTime.length())
   {
     sendMessage(sendTime);
   }
+  timeFilter.Run();
   delay(2);
 }
