@@ -1,5 +1,5 @@
 #include "EffectManager.h"
-#include <Adafruit_NeoPixel.h>
+#include <FastLED.h>
 
 
 void EffectManager::AddEffect(IEffect* effect)
@@ -7,7 +7,7 @@ void EffectManager::AddEffect(IEffect* effect)
     m_effects.push_back(effect);   
 }
 
-void EffectManager::Run(Adafruit_NeoPixel* strip, uint64_t systime)
+void EffectManager::Run(CRGB* strip, uint64_t systime)
 {
     if(m_effects.size())
     {

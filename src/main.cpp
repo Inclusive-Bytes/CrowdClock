@@ -13,7 +13,7 @@
  */
 
 #include <WifiEspNowBroadcast.h>
-#include <Adafruit_NeoPixel.h>
+#include "FastLED.h"
 #if defined(ARDUINO_ARCH_ESP8266)
 #include <ESP8266WiFi.h>
 #elif defined(ARDUINO_ARCH_ESP32)
@@ -25,16 +25,18 @@
 #include "TimeFilter.h"
 #include "EffectManager.h"
 #include "EffectStepColour.h"
+#include "Ports.h"
 
-#define PIN 0
+
 #define NUM_PIXELS 8
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ800);
+CRGB strip[NUM_PIXELS];
+
 
 
 TxTime txTime(10, 50);  // Tx every 10ms, scale timer to every 50ms
 
-PacerLED statusLED(8);
+PacerLED statusLED(STATUS_LED);
 
 JSONTime jsonTime; 
 SystemTime systemTime;
@@ -56,12 +58,13 @@ void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t co
   }
 }
 
-void
-setup()
+void setup()
 {
   Serial.begin(115200);
   delay(1000);
   Serial.println();
+
+  FastLED.addLeds<NEOPIXEL   ,LED_PIN>(strip, NUM_PIXELS);
 
   WiFi.persistent(false);
   bool ok = WifiEspNowBroadcast.begin("ESPNOW", 3);
@@ -88,21 +91,9 @@ setup()
 
   effectManager.AddEffect(&effectStepColour);
 
-  strip.begin();
-  strip.show(); // Initialize all pixels to 'off'
-  uint8_t r=16;
-  for(int i=0 ; i  < NUM_PIXELS ; i++)
-  {
-    strip.setPixelColor(i, r,0,0);
-    r+=16;
-  }
-  strip.show();
-
-
 }
 
-void
-sendMessage(String& message)
+void sendMessage(String& message)
 {
  //Serial.println(message);
   WifiEspNowBroadcast.send(reinterpret_cast<const uint8_t*>(message.c_str()), message.length());
@@ -122,12 +113,8 @@ sendMessage(String& message)
 }
 
 
-void
-loop()
+void loop()
 {
-
-
-
 
   WifiEspNowBroadcast.loop();
   statusLED.Run();
@@ -138,5 +125,6 @@ loop()
   }
   timeFilter.Run();
   delay(2);
-  effectManager.Run(&strip, systemTime.GetTime());
+  effectManager.Run(strip, systemTime.GetTime());
+  FastLED.show();
 }

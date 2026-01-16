@@ -1,10 +1,10 @@
 #include "EffectStepColour.h"
-#include <Adafruit_NeoPixel.h>
 
-void EffectStepColour::Run(Adafruit_NeoPixel* strip, uint64_t systime)
+
+void EffectStepColour::Run(CRGB* strip, uint64_t systime)
 {
     #define NUM_COLOURS 8
-    uint8_t colours[NUM_COLOURS][3]=
+    CRGB colours[NUM_COLOURS]=
     {
         {0xff,0,0},
         {0,0xff,0},
@@ -13,16 +13,14 @@ void EffectStepColour::Run(Adafruit_NeoPixel* strip, uint64_t systime)
         {0xff,0xff,0},
         {0,0xff,0xff},
         {0xff,0xff,0xff},
-        {0xc0,0x30,0x80},
+        {0xc0,0x30,0x80}, 
 
     };
     uint64_t stage = (systime / 500) % NUM_COLOURS;
  
-    for(int i = 0 ; i < strip->numPixels() ; i++)
+    for(int i = 0 ; i < FastLED.size() ; i++)
     {
-        strip->setPixelColor(i, colours[stage][0],colours[stage][1],colours[stage][2]);
+        strip[i]=colours[stage];
     }
-    strip->show();
-
 }
 
