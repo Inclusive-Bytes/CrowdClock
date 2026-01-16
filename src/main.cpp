@@ -25,8 +25,9 @@
 #include "TimeFilter.h"
 #include "EffectManager.h"
 #include "EffectStepColour.h"
+#include "Ports.h"
 
-#define LED_PIN 0
+
 #define NUM_PIXELS 8
 
 CRGB strip[NUM_PIXELS];
@@ -35,7 +36,7 @@ CRGB strip[NUM_PIXELS];
 
 TxTime txTime(10, 50);  // Tx every 10ms, scale timer to every 50ms
 
-PacerLED statusLED(8);
+PacerLED statusLED(STATUS_LED);
 
 JSONTime jsonTime; 
 SystemTime systemTime;
