@@ -92,6 +92,8 @@ void setup()
   Serial.println(WiFi.softAPmacAddress());
 
   effectManager.AddEffect(&effectWhiteFade);
+  effectManager.AddEffect(&effectStepColour);
+
 
 }
 

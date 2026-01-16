@@ -18,5 +18,6 @@ public:
     void Run(CRGB* strip, uint64_t systime);
 private:
     std::vector<IEffect*> m_effects;    
+    static const int SecondsPerEffect = 5;
 };
 #endif // __EFFECTMANAGER_H__
