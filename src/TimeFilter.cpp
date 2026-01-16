@@ -1,7 +1,7 @@
 #include "TimeFilter.h"
 
 
-TimeFilter::TimeFilter(TxTime* txTime, SystemTime* systemTime, int filterTime)
+TimeFilter::TimeFilter( SystemTime* systemTime, int filterTime)
 : Pacer(true)
 {
     m_systemTime = systemTime;

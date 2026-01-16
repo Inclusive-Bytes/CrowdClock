@@ -9,7 +9,7 @@
 class TimeFilter : private Pacer
 {
 public:    
-    TimeFilter(TxTime* txTime, SystemTime* systemTime, int filterTime);
+    TimeFilter(SystemTime* systemTime, int filterTime);
 
     void Init();
 

@@ -11,12 +11,7 @@ TxTime::TxTime(int txRate, int timerScaler)
     SetPace(txRate);
 }
 
-uint64_t TxTime::GetTxTime()
-{
-    m_localT = millis();
-    m_localT = m_localT - (m_localT % m_timerScaler);    
-    return m_localT;
-}
+
 
 void TxTime::Init()
 {

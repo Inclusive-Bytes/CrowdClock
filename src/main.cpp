@@ -37,14 +37,14 @@ TxTime txTime(10, 50);  // Tx every 10ms, scale timer to every 50ms
 PacerLED statusLED(8);
 
 JSONTime jsonTime; 
-SystemTime systemTime(&txTime);
-TimeFilter timeFilter(&txTime, &systemTime, 45);
+SystemTime systemTime;
+TimeFilter timeFilter(&systemTime, 45);
+
 EffectManager effectManager;
 
 EffectStepColour effectStepColour;
 
-void
-processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
+void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
   char message[count + 1] = {0};
   memcpy(message,buf, count);

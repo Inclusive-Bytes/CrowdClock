@@ -2,13 +2,11 @@
 #define __SYSTEMTIME_H__
 
 #include <Arduino.h>
-#include "IGetTxTime.h"
-
 
 class SystemTime
 {
 public:
-    SystemTime(IGetTxTime* getTxTime);
+    SystemTime();
 
     void UpdateTime(uint64_t newTime);
 
@@ -16,7 +14,5 @@ public:
     void ClearOffset() { m_currentOffset = 0;}
 private:
     int64_t m_currentOffset;    
-    IGetTxTime* m_getTxTime;
-
 };
 #endif // __SYSTEMTIME_H__

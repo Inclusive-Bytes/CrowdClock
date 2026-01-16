@@ -2,7 +2,7 @@
 
 
 
-SystemTime::SystemTime(IGetTxTime* getTxTime)
+SystemTime::SystemTime()
 {
     m_currentOffset = 0; 
 }
