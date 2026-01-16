@@ -25,6 +25,7 @@
 #include "TimeFilter.h"
 #include "EffectManager.h"
 #include "EffectStepColour.h"
+#include "EffectWhiteFade.h"
 #include "Ports.h"
 
 
@@ -45,6 +46,7 @@ TimeFilter timeFilter(&systemTime, 45);
 EffectManager effectManager;
 
 EffectStepColour effectStepColour;
+EffectWhiteFade effectWhiteFade;
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
@@ -89,7 +91,7 @@ void setup()
   Serial.print("MAC address of this node is ");
   Serial.println(WiFi.softAPmacAddress());
 
-  effectManager.AddEffect(&effectStepColour);
+  effectManager.AddEffect(&effectWhiteFade);
 
 }
 
