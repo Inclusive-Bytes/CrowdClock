@@ -9,7 +9,7 @@
 class TimeFilter : private Pacer
 {
 public:    
-    TimeFilter(TxTime* txTime, SystemTime* systemTime, int filterTime);
+    TimeFilter(SystemTime* systemTime, int filterTime);
 
     void Init();
 
@@ -25,7 +25,6 @@ public:
     
 private:
     HighestTime m_highestTime;
-    TxTime* m_txTime;
     SystemTime* m_systemTime;
     bool m_higherTimeFound;
 

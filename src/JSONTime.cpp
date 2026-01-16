@@ -14,6 +14,10 @@ uint64_t  JSONTime::Update(const char * const message)
         Serial.println(rxTime);
         return rxTime;
     }
+    else
+    {
+        Serial.println("JSON Error");
+    }
     
     return 0;
 }
