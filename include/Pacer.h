@@ -7,10 +7,10 @@ class Pacer
 {
 public:
     Pacer(bool autoReset);
-
     bool Pace();
     void SetPace(uint64_t newPace);
     void PacerReset();
+    void SetAutoReset(bool autoReset){ m_autoReset = autoReset;}
 protected:
     bool m_autoReset;
     bool m_timeup;

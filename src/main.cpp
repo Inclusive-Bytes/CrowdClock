@@ -27,6 +27,7 @@
 #include "EffectStepColour.h"
 #include "EffectWhiteFade.h"
 #include "Ports.h"
+#include "ContextStatusLed.h"
 
 
 #define NUM_PIXELS 8
@@ -37,7 +38,7 @@ CRGB strip[NUM_PIXELS];
 
 TxTime txTime(10, 50);  // Tx every 10ms, scale timer to every 50ms
 
-PacerLED statusLED(STATUS_LED);
+ContextStatusLed statusLED(STATUS_LED);
 
 JSONTime jsonTime; 
 SystemTime systemTime;
@@ -58,6 +59,7 @@ void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t co
   {
     timeFilter.RxNewTime(rxTime);
   }
+  statusLED.Kick();
 }
 
 void setup()
@@ -86,7 +88,7 @@ void setup()
  
   WifiEspNowBroadcast.onReceive(processRx, nullptr);
 
-  statusLED.SetPattern(0xf0f00000,50);
+ 
 
   Serial.print("MAC address of this node is ");
   Serial.println(WiFi.softAPmacAddress());
