@@ -8,7 +8,7 @@ class PacerLED : public Pacer
 public:
     PacerLED(int port);
     void SetPattern(uint32_t pattern, int pace);
-    void Run();
+    virtual void Run();
     void SetDefaultPattern(uint32_t pattern, int pace);
     void Default();
     void SetState(bool on);
