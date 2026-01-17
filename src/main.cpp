@@ -25,12 +25,12 @@
 #include "TimeFilter.h"
 #include "EffectManager.h"
 #include "EffectStepColour.h"
-#include "EffectWhiteFade.h"
+#include "EffectPurpleChaseFlash.h"
 #include "Ports.h"
 #include "ContextStatusLed.h"
 
 
-#define NUM_PIXELS 8
+#define NUM_PIXELS 16
 
 CRGB strip[NUM_PIXELS];
 
@@ -47,7 +47,7 @@ TimeFilter timeFilter(&systemTime, 45);
 EffectManager effectManager;
 
 EffectStepColour effectStepColour;
-EffectWhiteFade effectWhiteFade;
+EffectEffectPurpleChaseFlash effectPurpleChase;
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
@@ -93,7 +93,7 @@ void setup()
   Serial.print("MAC address of this node is ");
   Serial.println(WiFi.softAPmacAddress());
 
-  effectManager.AddEffect(&effectWhiteFade);
+  effectManager.AddEffect(&effectPurpleChase);
   effectManager.AddEffect(&effectStepColour);
 
 
