@@ -25,7 +25,7 @@
 #include "TimeFilter.h"
 #include "EffectManager.h"
 #include "EffectStepColour.h"
-#include "EffectPurpleChaseFlash.h"
+#include "GenericFlasher.h"
 #include "Ports.h"
 #include "ContextStatusLed.h"
 
@@ -47,8 +47,8 @@ TimeFilter timeFilter(&systemTime, 45);
 EffectManager effectManager;
 
 
-EffectEffectPurpleChaseFlash effectPurpleChase(CRGB(80,0,80));
-EffectEffectPurpleChaseFlash effectBlueChase(CRGB(0,0,80));
+GenericFlasher effectPurpleChase(CRGB(80,0,80), NUM_PIXELS);
+GenericFlasher effectBlueChase(CRGB(0,0,80), NUM_PIXELS);
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
