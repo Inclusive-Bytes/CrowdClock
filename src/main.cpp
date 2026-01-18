@@ -46,8 +46,9 @@ TimeFilter timeFilter(&systemTime, 45);
 
 EffectManager effectManager;
 
-EffectStepColour effectStepColour;
-EffectEffectPurpleChaseFlash effectPurpleChase;
+
+EffectEffectPurpleChaseFlash effectPurpleChase(CRGB(80,0,80));
+EffectEffectPurpleChaseFlash effectBlueChase(CRGB(0,0,80));
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
@@ -94,8 +95,7 @@ void setup()
   Serial.println(WiFi.softAPmacAddress());
 
   effectManager.AddEffect(&effectPurpleChase);
-  effectManager.AddEffect(&effectStepColour);
-
+  effectManager.AddEffect(&effectBlueChase);
 
 }
 
