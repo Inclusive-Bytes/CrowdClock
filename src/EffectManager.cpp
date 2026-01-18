@@ -9,10 +9,9 @@ void EffectManager::AddEffect(IEffect* effect)
 
 void EffectManager::Run(CRGB* strip, uint64_t systime)
 {
-    int effectIndex = systime / (SecondsPerEffect * 1000) % m_effects.size();
+    int effectIndex = systime / EFFECT_TIME % m_effects.size();
     if(m_effects.size())
     {   
-        Serial.println(effectIndex);
         m_effects[effectIndex]->Run(strip, systime);
     }
 }

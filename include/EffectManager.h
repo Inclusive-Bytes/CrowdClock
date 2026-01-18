@@ -4,6 +4,7 @@
 #include <vector>
 #include "FastLED.h"
 
+#define EFFECT_TIME 5000
 
 class IEffect
 {
@@ -18,6 +19,5 @@ public:
     void Run(CRGB* strip, uint64_t systime);
 private:
     std::vector<IEffect*> m_effects;    
-    static const int SecondsPerEffect = 5;
 };
 #endif // __EFFECTMANAGER_H__
