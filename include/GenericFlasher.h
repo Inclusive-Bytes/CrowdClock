@@ -13,6 +13,8 @@ public:
     void Run(CRGB* strip, uint64_t systime) override;
     virtual const uint8_t* const GetTable();
 protected:
+    int GetState(uint64_t systime);
+    int GetSpeed();
     CRGB    m_colour;   
     int     m_numLEDs; 
     int     m_numStages;
