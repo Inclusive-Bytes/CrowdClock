@@ -28,6 +28,7 @@
 #include "GenericFlasher.h"
 #include "Ports.h"
 #include "ContextStatusLed.h"
+#include "EffectSwipe.h"
 
 
 #define NUM_PIXELS 16
@@ -48,7 +49,9 @@ EffectManager effectManager;
 
 
 GenericFlasher effectPurpleChase(CRGB(80,0,80), NUM_PIXELS);
-GenericFlasher effectBlueChase(CRGB(0,0,80), NUM_PIXELS);
+GenericFlasher effectGreenChase(CRGB(0,128,0), NUM_PIXELS);
+SwipeEffect   effectSwipe(CRGB(0,40,80), NUM_PIXELS);
+SwipeEffect   effectSwipeRed(CRGB(200,0,0), NUM_PIXELS);
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
@@ -72,7 +75,8 @@ void setup()
   FastLED.addLeds<NEOPIXEL   ,LED_PIN>(strip, NUM_PIXELS);
 
   WiFi.persistent(false);
-  bool ok = WifiEspNowBroadcast.begin("ESPNOW", 3);
+
+  bool ok = WifiEspNowBroadcast.begin("ESPNOW", 3,3000);
   if (!ok) {
     Serial.println("WifiEspNowBroadcast.begin() failed");
     
@@ -95,8 +99,10 @@ void setup()
   Serial.println(WiFi.softAPmacAddress());
 
   effectManager.AddEffect(&effectPurpleChase);
-  effectManager.AddEffect(&effectBlueChase);
 
+  effectManager.AddEffect(&effectSwipe);
+ effectManager.AddEffect(&effectGreenChase);
+ effectManager.AddEffect(&effectSwipeRed);
 }
 
 void sendMessage(String& message)
