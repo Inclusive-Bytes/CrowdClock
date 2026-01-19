@@ -29,6 +29,7 @@
 #include "Ports.h"
 #include "ContextStatusLed.h"
 #include "EffectSwipe.h"
+#include "EffectSynchronisedFlash.h"
 
 
 #define NUM_PIXELS 16
@@ -52,6 +53,7 @@ GenericFlasher effectPurpleChase(CRGB(80,0,80), NUM_PIXELS);
 GenericFlasher effectGreenChase(CRGB(0,128,0), NUM_PIXELS);
 SwipeEffect   effectSwipe(CRGB(0,40,80), NUM_PIXELS);
 SwipeEffect   effectSwipeRed(CRGB(200,0,0), NUM_PIXELS);
+EffectSynchronisedFlash effectSyncFlash(NUM_PIXELS);
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
@@ -101,8 +103,9 @@ void setup()
   effectManager.AddEffect(&effectPurpleChase);
 
   effectManager.AddEffect(&effectSwipe);
- effectManager.AddEffect(&effectGreenChase);
- effectManager.AddEffect(&effectSwipeRed);
+  effectManager.AddEffect(&effectGreenChase);
+  effectManager.AddEffect(&effectSwipeRed);
+  effectManager.AddEffect(&effectSyncFlash);
 }
 
 void sendMessage(String& message)

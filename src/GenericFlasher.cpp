@@ -25,9 +25,8 @@ uint8_t DefaultEffect[]=
 
 void GenericFlasher::Run(CRGB* strip, uint64_t systime)
 {
-    int speed = (EFFECT_TIME / m_numStages ) / m_speedScaler;   // Need to get everything within the allocated effect time
-    uint64_t state = (systime / speed) %  m_numStages;
-    state *= m_numLEDs;    // 16 leds per state
+    uint64_t state = GetState(systime);
+    state *= m_numLEDs;    // 16 leds per state so multiply into array above
 
     for(int i = 0 ; i < m_numLEDs ; i++)
     {
@@ -45,6 +44,17 @@ void GenericFlasher::Run(CRGB* strip, uint64_t systime)
 const uint8_t * const  GenericFlasher::GetTable()
 {
     return DefaultEffect;
+}
+
+
+int GenericFlasher::GetState(uint64_t systime)
+{
+  return (systime / GetSpeed()) %  m_numStages;  
+}
+
+int GenericFlasher::GetSpeed()
+{
+    return (EFFECT_TIME / m_numStages ) / m_speedScaler;    
 }
 
 
