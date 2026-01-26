@@ -5,7 +5,8 @@
 
 #define _countof(a) (sizeof(a) / sizeof(a[0]))
 
-static const CRGB colours[] = {CRGB(255, 0, 0), CRGB(0, 0, 0), CRGB(0, 0, 255), CRGB(0, 0, 0), CRGB(0, 255, 0), CRGB(0, 0, 0), CRGB(127, 0, 127), CRGB(0, 0, 0), CRGB(127, 127, 0), CRGB(0, 0, 0)};
+// Keep it running slower due to artifacting. Future fix possible.
+static const CRGB colours[] = {CRGB(255, 0, 0), CRGB(0, 0, 0), CRGB(0, 0, 255), CRGB(0, 0, 0), CRGB(0, 255, 0), CRGB(0, 0, 0)/*, CRGB(127, 0, 127), CRGB(0, 0, 0), CRGB(127, 127, 0), CRGB(0, 0, 0)*/};
 
 EffectSpiral::EffectSpiral(int numLeds)
 {
