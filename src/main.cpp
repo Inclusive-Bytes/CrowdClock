@@ -30,6 +30,7 @@
 #include "ContextStatusLed.h"
 #include "EffectSwipe.h"
 #include "EffectSynchronisedFlash.h"
+#include "EffectSpiral.h"
 
 
 #define NUM_PIXELS 16
@@ -42,7 +43,7 @@ TxTime txTime(10, 50);  // Tx every 10ms, scale timer to every 50ms
 
 ContextStatusLed statusLED(STATUS_LED);
 
-JSONTime jsonTime; 
+JSONTime jsonTime;
 SystemTime systemTime;
 TimeFilter timeFilter(&systemTime, 45);
 
@@ -54,6 +55,7 @@ GenericFlasher effectGreenChase(CRGB(0,128,0), NUM_PIXELS);
 SwipeEffect   effectSwipe(CRGB(0,40,80), NUM_PIXELS);
 SwipeEffect   effectSwipeRed(CRGB(200,0,0), NUM_PIXELS);
 EffectSynchronisedFlash effectSyncFlash(NUM_PIXELS);
+EffectSpiral effectSpiral(NUM_PIXELS);
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
@@ -81,7 +83,7 @@ void setup()
   bool ok = WifiEspNowBroadcast.begin("ESPNOW", 3,3000);
   if (!ok) {
     Serial.println("WifiEspNowBroadcast.begin() failed");
-    
+
     Pacer p(false);
     p.SetPace(2000);
     statusLED.SetPattern(0xaaaaaaaa,20);
@@ -92,10 +94,10 @@ void setup()
     ESP.restart();
  }
   Serial.println("Running");
- 
+
   WifiEspNowBroadcast.onReceive(processRx, nullptr);
 
- 
+
 
   Serial.print("MAC address of this node is ");
   Serial.println(WiFi.softAPmacAddress());
@@ -106,6 +108,7 @@ void setup()
   effectManager.AddEffect(&effectGreenChase);
   effectManager.AddEffect(&effectSwipeRed);
   effectManager.AddEffect(&effectSyncFlash);
+  effectManager.AddEffect(&effectSpiral);
 }
 
 void sendMessage(String& message)
