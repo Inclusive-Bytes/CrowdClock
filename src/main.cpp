@@ -31,6 +31,7 @@
 #include "EffectSwipe.h"
 #include "EffectSynchronisedFlash.h"
 #include "EffectSpiral.h"
+#include "EffectOrbit.h"
 
 
 #define NUM_PIXELS 16
@@ -56,6 +57,8 @@ SwipeEffect   effectSwipe(CRGB(0,40,80), NUM_PIXELS);
 SwipeEffect   effectSwipeRed(CRGB(200,0,0), NUM_PIXELS);
 EffectSynchronisedFlash effectSyncFlash(NUM_PIXELS);
 EffectSpiral effectSpiral(NUM_PIXELS);
+EffectOrbit effectOrbitYellow(CRGB(127, 127, 0), NUM_PIXELS);
+EffectOrbit effectOrbitGreen(CRGB(0, 255, 0), NUM_PIXELS);
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
@@ -106,9 +109,11 @@ void setup()
 
   effectManager.AddEffect(&effectSwipe);
   effectManager.AddEffect(&effectGreenChase);
+  effectManager.AddEffect(&effectOrbitYellow);
   effectManager.AddEffect(&effectSwipeRed);
   effectManager.AddEffect(&effectSyncFlash);
   effectManager.AddEffect(&effectSpiral);
+  effectManager.AddEffect(&effectOrbitGreen);
 }
 
 void sendMessage(String& message)
