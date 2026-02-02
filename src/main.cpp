@@ -32,6 +32,8 @@
 #include "EffectSynchronisedFlash.h"
 #include "EffectHorizontalPath.h"
 #include "EffectSpiral.h"
+#include "EffectOrbit.h"
+#include "EffectTriOrbit.h"
 
 
 #define NUM_PIXELS 16
@@ -58,6 +60,10 @@ SwipeEffect   effectSwipeRed(CRGB(200,0,0), NUM_PIXELS);
 EffectSynchronisedFlash effectSyncFlash(NUM_PIXELS);
 EffectHorizontalPath effectHorizontalPath(NUM_PIXELS, CRGB(20,0,180));
 EffectSpiral effectSpiral(NUM_PIXELS);
+EffectOrbit effectOrbitYellow(CRGB(127, 127, 0), NUM_PIXELS);
+EffectOrbit effectOrbitGreen(CRGB(0, 255, 0), NUM_PIXELS);
+EffectTriOrbit effectTriOrbitPurple(CRGB(127, 0, 127), NUM_PIXELS);
+EffectTriOrbit effectTriOrbitCyan(CRGB(0, 127, 127), NUM_PIXELS);
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
@@ -108,10 +114,14 @@ void setup()
 
   effectManager.AddEffect(&effectSwipe);
   effectManager.AddEffect(&effectGreenChase);
+  effectManager.AddEffect(&effectOrbitYellow);
+  effectManager.AddEffect(&effectTriOrbitCyan);
   effectManager.AddEffect(&effectSwipeRed);
   effectManager.AddEffect(&effectSyncFlash);
   effectManager.AddEffect(&effectHorizontalPath);
   effectManager.AddEffect(&effectSpiral);
+  effectManager.AddEffect(&effectOrbitGreen);
+  effectManager.AddEffect(&effectTriOrbitPurple);
 }
 
 void sendMessage(String& message)
