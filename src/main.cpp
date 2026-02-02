@@ -30,6 +30,7 @@
 #include "ContextStatusLed.h"
 #include "EffectSwipe.h"
 #include "EffectSynchronisedFlash.h"
+#include "EffectHorizontalPath.h"
 
 
 #define NUM_PIXELS 16
@@ -38,13 +39,13 @@ CRGB strip[NUM_PIXELS];
 
 
 
-TxTime txTime(10, 50);  // Tx every 10ms, scale timer to every 50ms
+TxTime txTime(5, 25);  // Tx every 10ms, scale timer to every 50ms
 
 ContextStatusLed statusLED(STATUS_LED);
 
 JSONTime jsonTime; 
 SystemTime systemTime;
-TimeFilter timeFilter(&systemTime, 45);
+TimeFilter timeFilter(&systemTime, 35);
 
 EffectManager effectManager;
 
@@ -54,6 +55,7 @@ GenericFlasher effectGreenChase(CRGB(0,128,0), NUM_PIXELS);
 SwipeEffect   effectSwipe(CRGB(0,40,80), NUM_PIXELS);
 SwipeEffect   effectSwipeRed(CRGB(200,0,0), NUM_PIXELS);
 EffectSynchronisedFlash effectSyncFlash(NUM_PIXELS);
+EffectHorizontalPath effectHorizontalPath(NUM_PIXELS, CRGB(20,0,180));
 
 void processRx(const uint8_t mac[WIFIESPNOW_ALEN], const uint8_t* buf, size_t count, void* arg)
 {
@@ -106,6 +108,7 @@ void setup()
   effectManager.AddEffect(&effectGreenChase);
   effectManager.AddEffect(&effectSwipeRed);
   effectManager.AddEffect(&effectSyncFlash);
+  effectManager.AddEffect(&effectHorizontalPath);
 }
 
 void sendMessage(String& message)
