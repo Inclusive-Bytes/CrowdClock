@@ -42,13 +42,13 @@ CRGB strip[NUM_PIXELS];
 
 
 
-TxTime txTime(5, 25);  // Tx every 10ms, scale timer to every 50ms
+TxTime txTime(5, 5);  // Tx every 5ms scaled to 5ms
 
 ContextStatusLed statusLED(STATUS_LED);
 
 JSONTime jsonTime;
 SystemTime systemTime;
-TimeFilter timeFilter(&systemTime, 35);
+TimeFilter timeFilter(&systemTime, 5);  // See if a new time received every 5ms
 
 EffectManager effectManager;
 
