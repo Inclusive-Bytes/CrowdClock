@@ -1,0 +1,120 @@
+Plot Report
+-----------
+
+Report Written:     11:46 Tuesday, January 20, 2026
+Project Path:       N:\InclusiveBytes\LightNightMesh\LightNightMesh\Hardware\LightNightBadge.prj
+Design Path:        N:\InclusiveBytes\LightNightMesh\LightNightMesh\Hardware\LightNightBadge.pcb
+Design Title:       
+Created:            16/01/2026 19:15:03
+Last Saved:         20/01/2026 11:46:51
+Editing Time:       1846 min
+Units:              mm (precision 1)
+
+
+Device Settings
+===============
+
+
+Gerber Settings
+===============
+
+    Leading zero suppression.
+    G01 assumed throughout.
+    Line termination <*> <CR> <LF>.
+    3.5 format absolute inches.
+    Format commands defined in Gerber file.
+    Aperture table defined in Gerber file.
+    Hardware arcs allowed.
+
+
+Drill Settings
+==============
+
+    Excellon Format 2
+    Format 3.5 absolute in mm.
+    Zero suppression Leading
+
+
+
+Plots Output
+============
+
+    Plot Job: "N:\InclusiveBytes\LightNightMesh\LightNightMesh\Hardware\LightNightBadge.mop"
+
+
+Gerber Output
+=============
+
+N:\InclusiveBytes\LightNightMesh\LightNightMesh\Hardware\Plots\LightNightBadge - Bottom Copper.gbr
+
+    Layers:
+    -----------------
+    Bottom Copper
+
+    D-Code Shape  (thou)
+    ---------------------------------------------------------------
+    D10    Round 50.00
+    D11    Round 31.50
+    D12    Round 141.73
+    D13    Round 15.75
+    D14    Round 110.24
+    D15    Rectangle 66.93 X 118.11  Rotation 90
+    D16    Oval 66.93 X 118.11  Rotation 90
+    D17    Rectangle 62.99 X 137.80  Rotation 90
+    D18    Oval 62.99 X 137.80  Rotation 90
+    D19    Octagon 118.11
+    D70    Square 118.11
+    D71    Round 118.11
+    D20    Rounded Rectangle 70.00 X 118.11 X 19.69  Rotation 90
+    D21    Rectangle 78.74 X 118.11  Rotation 90
+    D22    Oval 78.74 X 118.11  Rotation 90
+
+NC Drill Output
+===============
+
+N:\InclusiveBytes\LightNightMesh\LightNightMesh\Hardware\Plots\LightNightBadge - NC Drill Data - [Through Hole].drl
+
+    Output:
+    ---------------------------
+    Plated Round Drill Holes
+    Plated Slots
+
+    Tool  Size           Count   ID
+    --------------------------------------
+    T001  0.03500 inches 3     D
+    T002  0.03937 inches 6     H
+    T003  0.04331 inches 18    P
+    T004  0.04724 inches 4     O
+    T005  0.13780 inches 4     Q
+    --------------------------------------
+    Total                35
+    --------------------------------------
+
+N:\InclusiveBytes\LightNightMesh\LightNightMesh\Hardware\Plots\LightNightBadge - NC Drill Data - [Through Hole] (Unplated).drl
+
+    Output:
+    -----------------------------
+    Unplated Round Drill Holes
+    Unplated Slots
+
+    Tool  Size Count   ID
+    ----------------------------
+    ----------------------------
+    Total      0
+    ----------------------------
+
+
+Gerber Output
+=============
+
+N:\InclusiveBytes\LightNightMesh\LightNightMesh\Hardware\Plots\LightNightBadge - CutOut.gbr
+
+    Layers:
+    ------------------
+    Board Outlines
+
+    D-Code Shape  (thou)
+    -----------------------
+    D23    Round 5.00
+
+End Of Report.
