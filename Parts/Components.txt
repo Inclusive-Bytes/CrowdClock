@@ -1,0 +1,8 @@
+Battery charger step up : https://www.aliexpress.com/item/1005005656423941.html
+ESP32 C3: https://www.aliexpress.com/item/1005010195000050.html
+WS2812 Ring. 16 LEDs: https://www.aliexpress.com/item/1005002304069758.html 
+LipoBattery: https://www.aliexpress.com/item/1005010587681795.html
+Slide switch: https://www.aliexpress.com/item/32797917204.html
+Molex KK 2 way housing  254 : https://cpc.farnell.com/molex/10-11-2023/connector-rcpt-2pos-1row-2-54mm/dp/CN25601
+Molex KK 2 way header 254: https://cpc.farnell.com/molex/22-27-2021/pin-header-0-1-2-way-lock/dp/CN09578
+Molex KK crimps 254 x 2: https://cpc.farnell.com/molex/08-50-0113/contact-socket-22awg-crimp/dp/CN25571
